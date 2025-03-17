@@ -48,6 +48,11 @@ kotlin {
     }
 }
 
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
