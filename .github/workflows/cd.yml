@@ -11,6 +11,8 @@ jobs:
         runs-on: self-hosted
 
         steps:
+            - name: Stop all containers
+              run: sudo docker stop $(docker ps -aq)
             - name: Remove all containers
               run: sudo docker rm $(sudo docker ps -aq)
             - name: Remove Images
