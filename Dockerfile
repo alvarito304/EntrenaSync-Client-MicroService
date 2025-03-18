@@ -20,7 +20,7 @@ FROM openjdk:21 AS run
 RUN apk update && apk add --no-cache wget
 RUN wget https://letsencrypt.org/certs/isrgrootx1.pem -P /tmp/ && \
     keytool -importcert -alias ISRGRootCA -file /tmp/isrgrootx1.pem \
-    -keystore $JAVA_HOME/lib/security/cacerts \  # Ruta correcta en Alpine
+    -keystore $JAVA_HOME/lib/security/cacerts \
     -storepass changeit -noprompt
 # Directorio de trabajo
 WORKDIR /app
