@@ -1,5 +1,5 @@
-# Etapa de compilación (usa imagen Gradle con JDK 21)
-FROM gradle:7.6.2-jdk21-alpine AS build
+# Etapa de compilación (usa imagen válida)
+FROM gradle:8.7.0-jdk21-alpine AS build
 
 WORKDIR /app
 COPY build.gradle.kts .
@@ -10,14 +10,15 @@ RUN chmod +x gradlew
 RUN ./gradlew clean build
 
 # --------------------------------------------
-# Etapa de ejecución (usa imagen Alpine corregida)
+# Etapa de ejecución (imagen verificada)
 # --------------------------------------------
-FROM eclipse-temurin:21-jdk-alpine AS run
+FROM eclipse-temurin:21.0.3_9-jdk-alpine AS run
 
+# Instalar dependencias y certificado (ruta absoluta)
 RUN apk update && apk add --no-cache wget
 RUN wget https://letsencrypt.org/certs/isrgrootx1.pem -P /tmp/ && \
     keytool -importcert -alias ISRGRootCA -file /tmp/isrgrootx1.pem \
-    -keystore $JAVA_HOME/lib/security/cacerts \
+    -keystore /opt/java/openjdk/lib/security/cacerts \
     -storepass changeit -noprompt
 
 WORKDIR /app
