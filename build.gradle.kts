@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     //logging
-    implementation("com.github.diamond-edge.klogging:klogging:0.4.4")
+    implementation("com.diamondedge:logging:2.0.3")
     implementation("org.lighthousegames:logging:2.0.3")
     implementation("ch.qos.logback:logback-classic:1.5.16")
 
