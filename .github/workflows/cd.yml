@@ -26,4 +26,4 @@ jobs:
             - name: Run Docker Container
               env:
                 MONGO_URI: ${{secrets.MONGO_URI}}
-              run: sudo docker run -d -p 8080:8080 --name entrena-sync-client-microservice-container -e "MONGO_URI=$MONGO_URI" alvaroherrero/entrena-sync-client-microservice
+              run: sudo docker run -d -p 8080:8080 --name entrena-sync-client-microservice-container -e "MONGO_URI=$MONGO_URI" -e "JAVA_OPTS=-Djdk.tls.client.protocols=TLSv1.2 -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStorePassword=changeit" alvaroherrero/entrena-sync-client-microservice
