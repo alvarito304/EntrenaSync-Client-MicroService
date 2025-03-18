@@ -10,9 +10,7 @@ jobs:
     build:
         runs-on: self-hosted
 
-        steps:
-            - name: Debug MONGO_URI
-              run: echo "MONGO_URI=${{ secrets.MONGO_URI }}"
+        steps:           
             - name: Stop all containers
               run: sudo docker stop $(sudo docker ps -aq)
             - name: Remove all containers
@@ -23,5 +21,9 @@ jobs:
               run: sudo docker pull alvaroherrero/entrena-sync-client-microservice:latest
             - name: Delete Old docker container
               run: sudo docker rm -f entrena-sync-client-microservice-container || true
+
+            - uses: actions/checkout@v3
             - name: Run Docker Container
-              run: sudo docker run -d -p 8080:8080 --name entrena-sync-client-microservice-container -e "MONGO_URI=${{secrets.MONGO_URI}}" alvaroherrero/entrena-sync-client-microservice
+              env:
+                MONGO_URI: ${{secrets.MONGO_URI}}
+              run: sudo docker run -d -p 8080:8080 --name entrena-sync-client-microservice-container -e "MONGO_URI=$MONGO_URI" alvaroherrero/entrena-sync-client-microservice
