@@ -20,9 +20,9 @@ repositories {
 
 dependencies {
     //logging
-    implementation("com.diamondedge:logging:2.0.3")
+    /*implementation("com.diamondedge:logging:2.0.3")
     implementation("org.lighthousegames:logging:2.0.3")
-    implementation("ch.qos.logback:logback-classic:1.5.16")
+    implementation("ch.qos.logback:logback-classic:1.5.16")*/
 
     //mongodb
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
