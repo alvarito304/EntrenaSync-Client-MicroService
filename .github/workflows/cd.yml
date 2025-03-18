@@ -16,4 +16,6 @@ jobs:
             - name: Delete Old docker container
               run: sudo docker rm -f entrena-sync-client-microservice-container || true
             - name: Run Docker Container
-              run: sudo docker run -d -p 8080:80 --name entrena-sync-client-microservice-container alvaroherrero/entrena-sync-client-microservice
+              run: sudo docker run -d -p 8080:80 --name entrena-sync-client-microservice-container \
+                -e "MONGO_URI=${{ secrets.MONGO_URI }}" \
+                alvaroherrero/entrena-sync-client-microservice
