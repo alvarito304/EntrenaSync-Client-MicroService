@@ -10,15 +10,15 @@ RUN chmod +x gradlew
 RUN ./gradlew clean build
 
 # --------------------------------------------
-# Etapa de ejecución (usando Alpine)
+# Etapa de ejecución (Alpine)
 # --------------------------------------------
-FROM openjdk:21-alpine AS run  # Cambia a imagen Alpine
+FROM openjdk:21-alpine AS run
 
-# Instalar wget y certificado SSL
+# Instalar dependencias y certificado (ruta corregida)
 RUN apk update && apk add --no-cache wget
 RUN wget https://letsencrypt.org/certs/isrgrootx1.pem -P /tmp/ && \
     keytool -importcert -alias ISRGRootCA -file /tmp/isrgrootx1.pem \
-    -keystore $JAVA_HOME/lib/security/cacerts \
+    -keystore /usr/lib/jvm/java-21-openjdk/lib/security/cacerts \
     -storepass changeit -noprompt
 
 WORKDIR /app
