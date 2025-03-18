@@ -12,9 +12,9 @@ jobs:
 
         steps:
             - name: Remove all containers
-              run: docker rm $(docker ps -aq)
+              run: sudo docker rm $(docker ps -aq)
             - name: Remove Images
-              run: docker rmi $(docker images -q)
+              run: sudo docker rmi $(docker images -q)
             - name: Pull Docker image
               run: sudo docker pull alvaroherrero/entrena-sync-client-microservice:latest
             - name: Delete Old docker container
