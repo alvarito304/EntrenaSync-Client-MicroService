@@ -10,7 +10,7 @@ jobs:
     build:
         runs-on: self-hosted
 
-        steps:           
+        steps:
             - name: Stop all containers
               run: sudo docker stop $(sudo docker ps -aq)
             - name: Remove all containers
