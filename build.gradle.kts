@@ -19,10 +19,9 @@ repositories {
 }
 
 dependencies {
-    //logging
-    implementation("com.diamondedge:logging:2.0.3")
-    implementation("org.lighthousegames:logging:2.0.3")
-    implementation("ch.qos.logback:logback-classic:1.5.16")
+    // Logback por defecto
+    implementation("org.springframework.boot:spring-boot-starter-logging")
+    implementation("org.slf4j:slf4j-api:2.0.9")
 
     //mongodb
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
