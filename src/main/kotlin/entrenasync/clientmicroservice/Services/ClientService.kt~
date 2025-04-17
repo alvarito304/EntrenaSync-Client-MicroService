@@ -6,9 +6,9 @@ import entrenasync.clientmicroservice.Dtos.ClientUpdateRequest
 import entrenasync.clientmicroservice.Exceptions.ClientNotFoundException
 import entrenasync.clientmicroservice.Mappers.toEntity
 import entrenasync.clientmicroservice.Mappers.toResponse
+import entrenasync.clientmicroservice.Models.Client
 import entrenasync.clientmicroservice.Repositories.IClientRepository
 import org.bson.types.ObjectId
-import org.lighthousegames.logging.logging
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -19,9 +19,9 @@ class ClientService(
     private val clientRepository: IClientRepository
 ) : IClientService {
 
-    private val logger = logging()
+    // private val logger = logging()
     override fun getClients(pageable: Pageable): Page<ClientResponse> {
-        logger.info {"Getting all clients"}
+       // logger.info {"Getting all clients"}
         var clients = clientRepository.findAll(pageable)
         return clients.map { client -> client.toResponse() }
     }
