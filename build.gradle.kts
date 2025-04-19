@@ -19,6 +19,10 @@ repositories {
 }
 
 dependencies {
+
+    // cache
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+
     // Logback por defecto
     implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.slf4j:slf4j-api:2.0.9")
@@ -35,6 +39,7 @@ dependencies {
     //serialization
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 
     //test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
