@@ -41,7 +41,3 @@ out/
 
 ### environment ###
 .env
-
-mongoinit.js
-
-docker-compose.yml

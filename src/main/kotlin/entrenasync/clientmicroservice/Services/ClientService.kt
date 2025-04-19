@@ -10,6 +10,9 @@ import entrenasync.clientmicroservice.Repositories.IClientRepository
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.CacheConfig
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.CachePut
 
 
 import org.springframework.data.domain.Page
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
+@CacheConfig(cacheNames = ["clients"])
 class ClientService(
     private val clientRepository: IClientRepository
 ) : IClientService {
@@ -29,17 +33,20 @@ class ClientService(
         return clients.map { client -> client.toResponse() }
     }
 
+    @CachePut(key = "#id")
     override fun getClientById(id: ObjectId): ClientResponse {
         log.info ("Getting client with id $id")
         return clientRepository.findById(id).orElseThrow{ClientNotFoundException(id)}.toResponse()
     }
 
+    @CachePut(key = "#result.id")
     override fun createClient(client: ClientCreateRequest): ClientResponse {
         log.info ( "Creating client" )
         val newClient = clientRepository.save(client.toEntity())
         return newClient.toResponse()
     }
 
+    @CachePut(key = "#id")
     override fun updateClient(id: ObjectId, client: ClientUpdateRequest): ClientResponse {
         log.info ( "Updating client with id $id" )
         var oldClient = clientRepository.findById(id).orElseThrow{ClientNotFoundException(id)}
@@ -47,6 +54,7 @@ class ClientService(
         return clientRepository.save(updatedClient).toResponse()
     }
 
+    @CacheEvict(key = "#id")
     override fun deleteClient(id: ObjectId) {
         log.info ( "Deleting client with id $id" )
         var clientToDelete = clientRepository.findById(id).orElseThrow{ClientNotFoundException(id)}
