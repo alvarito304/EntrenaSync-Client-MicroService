@@ -25,7 +25,7 @@ data class ClientCreateRequest(
     var phone: String,
 
     @field:NotBlank(message = "Client birth date must not be empty")
-    var birthDate: LocalDate,
+    var birthDate: String,
 
     @field:NotBlank(message = "Client gender must not be empty")
     var gender: String,

@@ -5,6 +5,7 @@ import entrenasync.clientmicroservice.Dtos.ClientResponse
 import entrenasync.clientmicroservice.Dtos.ClientUpdateRequest
 import entrenasync.clientmicroservice.Models.Client
 import org.bson.types.ObjectId
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 fun ClientCreateRequest.toEntity(): Client{
@@ -14,7 +15,7 @@ fun ClientCreateRequest.toEntity(): Client{
         address = this.address,
         avatar = this.avatar,
         phone = this.phone,
-        birthDate = this.birthDate,
+        birthDate = LocalDate.parse(birthDate),
         gender = this.gender,
         userId = this.userId,
         hiredServicesIds = this.hiredServicesIds,
