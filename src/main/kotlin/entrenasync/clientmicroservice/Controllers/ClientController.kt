@@ -24,6 +24,12 @@ class ClientController(
             .body(clientService.getClients(PageRequest.of(0, 10)))
     }
 
+    @GetMapping("/user/{userId}")
+    fun getClientByUserId(@PathVariable userId: String): ResponseEntity<ClientResponse>{
+        return ResponseEntity.ok()
+            .body(clientService.getClientByUserId(userId))
+    }
+
     @GetMapping("/{id}")
     fun getClientById(@PathVariable id: ObjectId): ResponseEntity<ClientResponse>{
         return ResponseEntity.ok()

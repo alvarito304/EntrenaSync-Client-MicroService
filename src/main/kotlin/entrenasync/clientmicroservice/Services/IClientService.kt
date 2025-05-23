@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable
 
 interface IClientService {
     fun getClients(pageable: Pageable): Page<ClientResponse>
+    fun getClientByUserId(userId: String): ClientResponse
     fun getClientById(id: ObjectId) : ClientResponse
     fun createClient(client: ClientCreateRequest) : ClientResponse
     fun updateClient(id: ObjectId, client: ClientUpdateRequest): ClientResponse

@@ -47,7 +47,6 @@ data class Client(
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
     // Relations
-    @field:NotBlank(message = "Client birth date must not be empty")
     var userId: String,
     var hiredServicesIds: List<String> = emptyList(),
     var workouts: List<String> = emptyList(),
