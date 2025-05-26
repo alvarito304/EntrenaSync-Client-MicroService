@@ -33,6 +33,12 @@ class ClientService(
         return clients.map { client -> client.toResponse() }
     }
 
+    override fun getClientByUserId(userId: String): ClientResponse {
+        log.info ("Getting client with userId $userId")
+        var client = clientRepository.findClientByUserId(userId)
+        return client?.toResponse() ?: throw ClientNotFoundException(userId)
+    }
+ 
     @CachePut(key = "#id")
     override fun getClientById(id: ObjectId): ClientResponse {
         log.info ("Getting client with id $id")

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface IClientRepository : MongoRepository<Client, ObjectId> {
+    fun findClientByUserId(userId: String): Client?
 }

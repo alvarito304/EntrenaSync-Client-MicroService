@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/Clients")
+@CrossOrigin(origins = ["http://localhost:4200"])
 class ClientController(
     private val clientService: IClientService
 ) {
@@ -22,6 +23,12 @@ class ClientController(
     fun getAllClients(): ResponseEntity<Page<ClientResponse>>{
         return ResponseEntity.ok()
             .body(clientService.getClients(PageRequest.of(0, 10)))
+    }
+
+    @GetMapping("/user/{userId}")
+    fun getClientByUserId(@PathVariable userId: String): ResponseEntity<ClientResponse>{
+        return ResponseEntity.ok()
+            .body(clientService.getClientByUserId(userId))
     }
 
     @GetMapping("/{id}")
