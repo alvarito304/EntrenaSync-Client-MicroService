@@ -25,4 +25,7 @@ data class ClientUpdateRequest(
     @field:NotBlank(message = "Client phone must not be empty")
     var phone: String?,
 
+    var hiredServicesIds: List<String> = emptyList(),
+    var workouts: List<String> = emptyList(),
+
 )
