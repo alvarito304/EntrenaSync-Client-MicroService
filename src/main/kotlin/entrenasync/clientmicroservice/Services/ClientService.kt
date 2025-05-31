@@ -33,6 +33,12 @@ class ClientService(
         return clients.map { client -> client.toResponse() }
     }
 
+    override fun getAllClients(): List<ClientResponse> {
+        log.info("Getting all clients without pagination")
+        val clients = clientRepository.findAll()
+        return clients.map { client -> client.toResponse() }
+    }
+
     override fun getClientByUserId(userId: String): ClientResponse {
         log.info ("Getting client with userId $userId")
         var client = clientRepository.findClientByUserId(userId)

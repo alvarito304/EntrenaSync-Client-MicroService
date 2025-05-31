@@ -24,6 +24,12 @@ class ClientController(
             .body(clientService.getClients(PageRequest.of(0, 10)))
     }
 
+    @GetMapping("/all")
+    fun getAllClientsNoPaginated(): ResponseEntity<List<ClientResponse>>{
+        return ResponseEntity.ok()
+            .body(clientService.getAllClients())
+    }
+
     @GetMapping("/user/{userId}")
     fun getClientByUserId(@PathVariable userId: String): ResponseEntity<ClientResponse>{
         return ResponseEntity.ok()
