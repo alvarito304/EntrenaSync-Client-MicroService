@@ -4,6 +4,7 @@ import entrenasync.clientmicroservice.Dtos.ClientCreateRequest
 import entrenasync.clientmicroservice.Dtos.ClientResponse
 import entrenasync.clientmicroservice.Dtos.ClientUpdateRequest
 import entrenasync.clientmicroservice.Services.IClientService
+import jakarta.validation.Valid
 import org.bson.types.ObjectId
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
@@ -49,7 +50,7 @@ class ClientController(
     }
 
     @PutMapping("/{id}")
-    fun updateClient(@PathVariable id: ObjectId, @RequestBody client: ClientUpdateRequest): ResponseEntity<ClientResponse>{
+    fun updateClient(@PathVariable id: ObjectId, @RequestBody @Valid client: ClientUpdateRequest): ResponseEntity<ClientResponse>{
         return ResponseEntity.ok()
             .body(clientService.updateClient(id, client))
     }

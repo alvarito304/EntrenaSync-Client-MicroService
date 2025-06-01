@@ -113,7 +113,8 @@ class ClientControllerTest {
             avatar = "updatedAvatar",
             phone = "0987654321",
             hiredServicesIds = emptyList(),
-            workouts = emptyList()
+            workouts = emptyList(),
+            gender = "Masculino"
         )
         every { clientService.updateClient(sampleId, updateRequest) } returns updateRequest.toEntity(sampleEntity).toResponse()
 

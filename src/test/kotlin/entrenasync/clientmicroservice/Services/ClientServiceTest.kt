@@ -113,7 +113,8 @@ class ClientServiceTest {
             avatar = "updatedAvatar",
             phone = "0987654321",
             hiredServicesIds = emptyList(),
-            workouts = emptyList()
+            workouts = emptyList(),
+            gender = "Masculino"
         )
         every { clientRepository.findById(sampleId) } returns java.util.Optional.of(sampleEntity)
         every { clientRepository.save(any()) } returns updateRequest.toEntity(sampleEntity).apply {
@@ -128,6 +129,7 @@ class ClientServiceTest {
         assertEquals(updateRequest.avatar, result.avatar)
         assertEquals(updateRequest.phone, result.phone)
         assertEquals(sampleEntity.birthDate, result.birthDate)
+        assertEquals(updateRequest.gender, result.gender)
         verify { clientRepository.findById(sampleId) }
         verify { clientRepository.save(any()) }
     }
@@ -140,7 +142,8 @@ class ClientServiceTest {
             avatar = "updatedAvatar",
             phone = "0987654321",
             hiredServicesIds = emptyList(),
-            workouts = emptyList()
+            workouts = emptyList(),
+            gender = "Masculino"
         )
         every { clientRepository.findById(sampleId) }.returns(java.util.Optional.empty())
 

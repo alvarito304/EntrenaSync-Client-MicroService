@@ -31,7 +31,7 @@ fun ClientUpdateRequest.toEntity(oldClient: Client): Client{
         avatar = if (this.avatar != null) this.avatar else oldClient.avatar,
         phone = if (this.phone != null) this.phone else oldClient.phone,
         birthDate = oldClient.birthDate,
-        gender = oldClient.gender,
+        gender = if (this.gender != null) this.gender else oldClient.gender,
         userId = oldClient.userId,
         hiredServicesIds = this.hiredServicesIds.ifEmpty { oldClient.hiredServicesIds },
         workouts = this.workouts.ifEmpty { oldClient.workouts },
