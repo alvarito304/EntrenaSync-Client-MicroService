@@ -34,7 +34,7 @@ data class ClientResponse(
     var birthDate: LocalDate,
 
     @field:NotBlank(message = "Client birth date must not be empty")
-    var gender: String,
+    var gender: String?,
 
     var createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now(),
