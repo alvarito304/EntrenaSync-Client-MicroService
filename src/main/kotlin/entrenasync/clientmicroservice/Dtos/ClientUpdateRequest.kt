@@ -20,7 +20,7 @@ data class ClientUpdateRequest(
     @field:Size(min = 9, max = 15, message = "Client phone must be between 9 and 15 digits")
     var phone: String?,
 
-    var gender: String,
+    var gender: String?,
 
     var hiredServicesIds: List<String> = emptyList(),
     var workouts: List<String> = emptyList(),
