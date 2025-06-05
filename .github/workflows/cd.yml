@@ -1,30 +1,29 @@
 name: CD Pipeline
 
 on:
-    workflow_run:
-        workflows: ["CI Pipeline"]
-        types:
-            - completed
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
 
 jobs:
-    build:
-        runs-on: self-hosted
+  build:
+    runs-on: self-hosted
 
-        steps:
-            - name: Stop all containers
-              run: sudo docker stop $(sudo docker ps -aq)
-            - name: Remove all containers
-              run: sudo docker rm $(sudo docker ps -aq)
-            - name: Remove Images
-              run: sudo docker rmi $(sudo docker images -q)
-            - name: Pull Docker image
-              run: sudo docker pull alvaroherrero/entrena-sync-client-microservice:latest
-            - name: Delete Old docker container
-              run: sudo docker rm -f entrena-sync-client-microservice-container || true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-            - uses: actions/checkout@v3
-            - name: Run Docker Container
-              env:
-                MONGO_URI: ${{secrets.MONGO_URI}}
-              run: sudo docker run -d --restart always -p 8080:8080 --name entrena-sync-client-microservice-container -e "MONGO_URI=$MONGO_URI" alvaroherrero/entrena-sync-client-microservice
+      - name: Descargar última versión de la imagen
+        run: |
+          sudo docker-compose -f ../../Docker.Compose.yml pull entrena-sync-clients-microservice
 
+      - name: Deploy con docker-compose (working-directory)
+        run: sudo docker-compose -f ../../Docker.Compose.yml --env-file ../../.env.apigetaway -p entrena-sync up -d entrena-sync-clients-microservice --build
+
+      - name: Clean up unused Docker images
+        run: |
+          sudo docker image prune -f
+          sudo docker container prune -f
+          sudo docker volume prune -f
+          sudo docker network prune -f
