@@ -33,7 +33,11 @@ fun ClientUpdateRequest.toEntity(oldClient: Client): Client{
         birthDate = oldClient.birthDate,
         gender = if (this.gender != null) this.gender else oldClient.gender,
         userId = oldClient.userId,
-        hiredServicesIds = this.hiredServicesIds.ifEmpty { oldClient.hiredServicesIds },
+        hiredServicesIds = if (this.hiredServicesIds.isEmpty()) {
+            oldClient.hiredServicesIds
+        } else {
+            oldClient.hiredServicesIds + this.hiredServicesIds
+        },
         workouts = this.workouts.ifEmpty { oldClient.workouts },
         createdAt = oldClient.createdAt,
         updatedAt = LocalDateTime.now()
